@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ACTIONS -->
+    <record id="realestate_owner_action" model="ir.actions.act_window">
+        <field name="name">Owners</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">realestate.owner</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                <b>Create a new owner</b>
+            </p>
+        </field>
+    </record>
+
+    <!-- owners -->
+    <menuitem 
+        id="menu_realestate_owner"
+        name="Owners"
+        parent="menu_realestate"
+        sequence="10"
+        action="realestate_owner_action"
+        />
+        
+    <!-- VIEWS -->
+    <!--form-->
+    
+    <record id="realestate_owner_form" model="ir.ui.view">
+        <field name="name">realestate.owner.form</field>
+        <field name="model">realestate.owner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <!-- <xpath expr="//group[@name='base_information']" position="before"> -->
+                        <group>
+                            <group>
+                                <div class="oe_title">
+                                    <h1>Owner</h1><br/>
+                                </div>
+                                <field name="name"/>
+                                <br/><br/>
+                                <div class="oe_title">
+                                    <h1>Contact</h1><br/>
+                                </div>
+                                <field name="phone"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <div class="o_address_format">
+                                    <div class="oe_title">
+                                        <h1>Address</h1><br/>
+                                    </div>
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <div class="oe_title">
+                                <h1>Properties owned</h1><br/>
+                            </div>
+                            <field name="property_ids" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    <!-- </xpath> -->
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

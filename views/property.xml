@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ACTIONS -->
+    <record id="realestate_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">realestate.property</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                <b>Create a new property</b>
+            </p>
+        </field>
+    </record>
+
+    <!-- Properties -->
+    <menuitem id="menu_realestate_property" name="Properties" parent="menu_realestate" sequence="10" action="realestate_property_action" />
+
+
+    <!-- VIEWS -->
+    <!--form-->
+    <record id="realestate_property_form" model="ir.ui.view">
+        <field name="name">realestate.property.form</field>
+        <field name="model">realestate.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" options="{'clickable': True}" />
+                </header>
+                <sheet>
+                    <group>
+                        <group name="Property">
+                            <div class="oe_title">
+                                <h1>Property</h1>
+                            </div>
+                            <field name="name" />
+                            <field name="description" />
+                            <field name="type" />
+                            <field name="area" string="Area m2" />
+                            <field name="owner_id" />
+                            <field name="available_for_sale" />
+                            <!-- new_owner_id is hidden unless available_for_sale is checked -->
+                            <field name="new_owner_id" attrs="{'invisible': [('available_for_sale', '=', False)]}" />
+                            <field name="available_for_rent" />
+                            <!-- renter_ids is hidden unless available_for_rent is checked -->
+                            <field name="renter_ids" attrs="{'invisible': [('available_for_rent', '=', False)]}" />
+
+                            <br />
+                            <br />
+
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <b>Address</b>
+                                <br />
+                            </span>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street" />
+                                <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                                <field name="city" placeholder="City" class="o_address_city" />
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}" />
+                                <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                            </div>
+
+
+                        </group>
+
+
+                        <group>
+                            <!-- pricing div is hidden unless available_for_sale or available_for_rent is checked -->
+                            <div class="oe_title" attrs="{'invisible': [('available_for_sale', '=', False), ('available_for_rent', '=', False)]}">
+                                <h1>Pricing</h1>
+                                <br />
+                            </div>
+                            <field name="rent_owner" attrs="{'invisible': [('available_for_rent', '=', False)]}" />
+                            <field name="rent_renters" attrs="{'invisible': [('available_for_rent', '=', False)]}" />
+                            <field name="sale_owner" attrs="{'invisible': [('available_for_sale', '=', False)]}" />
+                            <field name="sale_new_owner" attrs="{'invisible': [('available_for_sale', '=', False)]}" />
+                        </group>
+
+
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!--tree-->
+    <record id="realestate_property_tree" model="ir.ui.view">
+        <field name="name">realestate.property.tree</field>
+        <field name="model">realestate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="description" />
+                <field name="owner_id" />
+                <field name="type" />
+                <field name="city" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>
