@@ -11,7 +11,7 @@ class Renter(models.Model):
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, ondelete='cascade')
     
     # Many renters can live in one property
-    property_id = fields.Many2one('realestate.property', string='Property', required=True)
+    property_id = fields.Many2one('realestate.property', string='Property', required=True, ondelete='cascade')
 
     # Rent paid by the renter
     rent = fields.Float(string='Rent', required=True)
