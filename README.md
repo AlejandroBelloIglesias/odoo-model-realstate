@@ -36,4 +36,4 @@ More information about the property model:
     - Number of bedrooms, bathrooms, etc.
     - Balcony, garden, etc.
 
-
+https://docs.google.com/presentation/d/114wyZPdQ6II6pT_xnD6SLKM-E9vQhaIXZUVkaN3H5Hg/edit?usp=sharing
